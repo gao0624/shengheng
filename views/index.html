@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>晟恒装饰</title>
+    <style>
+        ::-webkit-scrollbar{
+            display: none;
+        }
+        *{
+            padding:0;
+            margin:0;
+        }
+        .mylunbo{
+            margin:20px auto;
+            position: relative;
+            width: 1920px;
+            height: 432px;
+            /*background-color: purple;*/
+            overflow: hidden;
+        }
+        .mylunbo ul{
+            position: absolute;
+            top: 0;
+            display: flex;
+        }
+        ul li{
+            float:left;
+            list-style-type: none;
+        }
+        ol li{
+            list-style-type: none;
+        }
+        .arrow-l,
+        .arrow-r {
+            display: none;
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;/*高度40，上移20*/
+            width: 24px;
+            height: 40px;
+            background: rgba(0, 0, 0, .3);
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+            font-family: 'icomoon';
+            font-size: 18px;
+            z-index: 2;
+        }
+        .arrow-r {
+            right: 0;
+        }
+        .circle {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+        }
+        .circle li {
+            float: left;
+            width: 8px;
+            height: 8px;
+            /*background-color: #fff;*/
+            border: 2px solid rgba(240, 120, 120, 0.5);
+            margin: 0 3px;
+            border-radius: 50%;
+            /*鼠标经过显示小手*/
+            cursor: pointer;
+        }
+        .current {
+            background-color: #fff;
+        }
+        a:hover{
+            color:red;
+        }
+
+        .advantage{
+            box-shadow: 1px 5px 20px rgba(0,0,0,0.1);
+            border-radius: 2px;
+            background: #fff;
+            height: 160px;
+            width: 1563px;
+            position: relative;
+            top: -80px;
+            z-index: 1000;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .advantage div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .icon{
+            width: 60px;
+            height: 60px;
+            float: left;
+        }
+        .advantage_text{
+            float: left;
+            padding-left: 15px;
+            width: 195px;
+        }
+        .advantage_text .font{
+            display: block;
+            font-size: 24px;
+            color: #3d3333;
+        }
+        .advantage_text label{
+            font-size: 14px;
+            color: #5a5151;
+            padding-top: 5px;
+            display: inline-block;
+        }
+        .rendering{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .shell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            display: grid;
+            grid-template-rows: 500px 200px;
+        }
+
+        .box {
+            /*  将容器放置在第一行，其高度为第一行的高度 */
+            grid-row: 1 / 2;
+            /*  将容器放置在第一列，其宽度为第一到第八列的宽度 */
+            grid-column: 1 / 8;
+            width: 100vw;
+            height: 570px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* 设置 3D 转换，以便于创建立体效果 */
+            transform-style: preserve-3d;
+            /* 定义立体效果的观察距离 */
+            perspective: 800px;
+            /*  定义容器内包含的元素数量 */
+            --items: 5;
+            /* 定义容器内居中显示的元素 */
+            --middle: 3;
+            /* 定义容器内当前位置的元素 */
+            --position: 1;
+        }
+
+        div.item {
+            position: absolute;
+            width: 350px;
+            height: 500px;
+            background-color: coral;
+            /* 定义一个 CSS 变量 --r 的值为 var(--position) - var(--offset) */
+            --r: calc(var(--position) - var(--offset));
+            /* 定义变量 --abs 的值为 var(--r) * -1 和 var(--r) 中的最大值 */
+            --abs: max(calc(var(--r) * -1), var(--r));
+            /* 元素的过渡效果为所有属性在 0.25 秒内以线性方式变化 */
+            transition: all 0.25s linear;
+            /* 旋转-10deg*var(--r)角度,并向x轴负方向平移-330px*var(--r) */
+            transform: rotateY(calc(-10deg * var(--r))) translateX(calc(-330px * var(--r)));
+            /* 使当前的图片位于最前面 */
+            z-index: calc((var(--position) - var(--abs)));
+            background-size: cover;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.6);
+            border: #b5c5ff 10px solid;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 35px;
+            height: 35px;
+            margin: 10px;
+        }
+
+        .box .item:nth-of-type(1) {
+            --offset: 1;
+            background-image: url(http://img.haojie.cool/template/jiazhuang/50.png);
+        }
+
+        .box .item:nth-of-type(2) {
+            --offset: 2;
+            background-image: url(http://img.haojie.cool/template/jiazhuang/49.png);
+        }
+
+        .box .item:nth-of-type(3) {
+            --offset: 3;
+            background-image: url(http://img.haojie.cool/template/jiazhuang/47.png);
+        }
+
+        .box .item:nth-of-type(4) {
+            --offset: 4;
+            background-image: url(http://img.haojie.cool/template/jiazhuang/46.png);
+        }
+
+        .box .item:nth-of-type(5) {
+            --offset: 5;
+            background-image: url(http://img.haojie.cool/template/jiazhuang/45.png);
+        }
+
+        input:nth-of-type(1) {
+            grid-column: 2/3;
+            grid-row: 2/3;
+        }
+
+        input:nth-of-type(2) {
+            grid-column: 3/4;
+            grid-row: 2/3;
+        }
+
+        input:nth-of-type(3) {
+            grid-column: 4/5;
+            grid-row: 2/3;
+        }
+
+        input:nth-of-type(4) {
+            grid-column: 5/6;
+            grid-row: 2/3;
+        }
+
+        input:nth-of-type(5) {
+            grid-column: 6/7;
+            grid-row: 2/3;
+        }
+
+        input:nth-of-type(1):checked~.box {
+            --position: 1;
+        }
+
+        input:nth-of-type(2):checked~.box {
+            --position: 2;
+        }
+
+        input:nth-of-type(3):checked~.box {
+            --position: 3;
+        }
+
+        input:nth-of-type(4):checked~.box {
+            --position: 4;
+        }
+
+        input:nth-of-type(5):checked~.box {
+            --position: 5;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f5f5f5;">
+    <div class="mylunbo">
+            <a href="javascript:;" class="arrow-l"><</a>
+            <a href="javascript:;" class="arrow-r">></a>
+            <ul style="width: 100%;">
+                <li style="width: 100%;">
+                    <img src="https://image1.zhuangku.com/upfile2018/BannerPic/20200821145935_0976.jpg"alt="" />
+                </li>
+                <li style="width: 100%;">
+                    <img src="https://image1.zhuangku.com/upfile2018/BannerPic/20191227141904_3360.jpg" alt="" />
+                </li>
+                <li style="width: 100%;">
+                    <img src="https://image1.zhuangku.com/upfile2018/BannerPic/20200821150021_4570.jpg" alt="" />
+                </li>
+                <li style="width: 100%;">
+                    <img src="	https://image1.zhuangku.com/upfile2018/BannerPic/20191227141904_3360.jpg" alt="" />
+                </li>
+            </ul>
+            <ol class="circle">
+
+            </ol>
+    </div>
+
+    <div class="advantage">
+        <div>
+            <svg class="icon svg-icon" aria-hidden="true">
+                <svg t="1687604161596" class="icon" viewBox="0 0 1038 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2418" width="60" height="60"><path d="M205.721385 206.098985l0 468.148259 610.775654 0L816.497039 206.098985 205.721385 206.098985zM474.184743 633.993448l0-93.979418-40.253796 0 0 93.979418L245.975181 633.993448 245.975181 246.352781l187.955766 0 0 236.610906 40.253796 0 0-65.452711 93.976348 0 0-40.253796-93.976348 0L474.184743 246.352781l302.059524 0 0 130.904399L653.739165 377.25718l0 40.253796 122.505102 0 0 216.482473L474.184743 633.993448z" p-id="2419"></path><path d="M904.768455 85.957721 117.447922 85.957721c-64.761979 0-117.448946 52.686966-117.448946 117.448946l0 473.532897c0 64.764026 52.686966 117.450992 117.448946 117.450992l367.494838 0 0 90.299609L282.899138 884.690164l0 52.329832 456.418101 0 0-52.329832L537.273616 884.690164l0-90.299609 367.494838 0c64.761979 0 117.448946-52.686966 117.448946-117.450992L1022.217401 203.406666C1022.217401 138.644687 969.530434 85.957721 904.768455 85.957721zM969.887568 676.939563c0 35.906791-29.211299 65.122183-65.120137 65.122183L117.447922 742.061746c-35.907815 0-65.119113-29.215392-65.119113-65.122183L52.328809 203.406666c0-35.905768 29.211299-65.119113 65.119113-65.119113l787.319509 0c35.908838 0 65.120137 29.213345 65.120137 65.119113L969.887568 676.939563z" p-id="2420"></path></svg>
+            </svg>
+            <span class="advantage_text">
+                    <div class="font">免费设计</div>
+                    <label>获取四份免费设计</label>
+                </span>
+        </div>
+        <div>
+            <svg class="icon svg-icon" aria-hidden="true">
+                <svg t="1687604795658" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5206" width="60" height="60"><path d="M272.1 553.5c0 120 97.6 217.7 217.6 217.7s217.7-97.7 217.7-217.7c0-120-97.6-217.7-217.7-217.7-120 0.1-217.6 97.7-217.6 217.7z m371.6 0c0 84.9-69.1 154-154 154-84.8 0-153.9-69.1-153.9-154s69-153.9 153.9-153.9 154 69 154 153.9z" p-id="5207"></path><path d="M392.1 553.5c0 53.7 43.7 97.4 97.4 97.4s97.4-43.7 97.4-97.4-43.7-97.4-97.4-97.4c-53.7 0.1-97.4 43.7-97.4 97.4z m131.1 0c0 18.6-15.1 33.7-33.6 33.7-18.6 0-33.7-15.1-33.7-33.7s15.1-33.7 33.7-33.7c18.5 0.1 33.6 15.2 33.6 33.7z" p-id="5208"></path><path d="M721.7 271.9c11.9 11 29.3 19.2 50.3 19.2 16.5 0 35.2-5.1 55.1-17.8l3-2.2c49.3-40.2 50.6-41.6 52-43 12.3-12.6 12-32.8-0.6-45-12.1-11.8-31.2-12-43.5-0.8-1.6 1.4-9.3 7.8-46.6 38.3-11.7 7.1-22 8.9-26.6 4.6-4.3-4-6-13.9-0.4-24.3l1-2c14.3-32.1 26.9-79.4-27.8-118.3-63.9-49.2-152.2 24.5-185.4 52.2-2.6 2.2-4.8 4-6.5 5.4-19.4 15.4-75.5 58.2-75.6 58.2l1 1.4C283 207.4 132.8 363.1 132.8 553.7c0 161.6 108 298.2 255.5 342.1H255.1c-17.6 0-31.9 14.3-31.9 31.9s14.3 31.9 31.9 31.9h469.4c17.6 0 31.9-14.3 31.9-31.9s-14.3-31.9-31.9-31.9H591.2C738.8 852 846.8 715.3 846.8 553.7c0-171.4-121.4-314.8-282.7-349.1 8.5-6.6 16.2-12.6 21.3-16.6 2-1.6 4.6-3.8 7.8-6.4 74.2-62 98.7-56.1 106.7-49.9 14.1 10 19.5 13.9 7.9 40.3-18 34.7-12.3 75.6 13.9 99.9zM783 553.7C783 715.5 651.4 847 489.7 847 328 847 196.5 715.5 196.5 553.7S328 260.5 489.7 260.5 783 392 783 553.7z" p-id="5209"></path></svg>
+            </svg>
+            <span class="advantage_text">
+                    <div class="font">免费量房</div>
+                    <label>专业人员上门量房</label>
+                </span>
+        </div>
+        <div>
+            <svg class="icon svg-icon" aria-hidden="true">
+                <svg t="1687604324337" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3985" width="60" height="60"><path d="M919.03488 530.32448c-0.14848-70.25152-42.34752-171.6736-92.13952-221.47072l-228.23424-228.23936C576.27136 58.34752 546.5856 46.08 515.08224 46.08c-30.27456 0-58.79296 11.34592-80.65536 32.0256L205.04064 307.49696c-49.52576 49.51552-91.2896 150.68672-91.20256 220.8768l1.21856 327.31648c0.32256 64.73728 53.25312 117.66784 117.92896 117.99552l569.95328 1.21344c64.62464-0.07168 117.23264-52.68992 117.28384-117.22752l-1.18784-327.3472z m-70.33856 371.07712c-16.06656 16.39424-37.31968 25.42592-60.02688 25.42592l-541.94176-1.16224c-46.7968-0.10752-84.94592-38.97344-85.04832-86.6048l-1.16224-297.4464c-0.128-60.83072 36.75648-151.87456 78.93504-194.82624l216.09472-220.15488c15.88224-16.1792 37.16096-25.088 59.90912-25.088 22.85568 0 44.2624 8.98048 60.26752 25.2928l217.02144 221.08672c42.30656 43.09504 79.52896 134.22592 79.65696 194.98496l1.13664 297.46176a86.52288 86.52288 0 0 1-24.84224 61.0304z" p-id="3986"></path><path d="M515.61984 201.856l-1.08032-0.00512c-28.75392 0-55.50592 11.02848-75.33568 31.05792-19.32288 19.52256-29.81376 45.44512-29.53216 73.00096 0.57344 58.35264 49.36704 106.30656 108.75904 106.89536l1.07008 0.00512c28.75904 0 55.52128-11.02848 75.35104-31.06304 19.328-19.52256 29.81888-45.44512 29.54752-73.02144-0.52736-58.33728-49.32608-106.28096-108.77952-106.86976z m51.01056 152.9088c-12.64128 12.76928-29.696 19.79904-48.0256 19.79904h-0.68096c-37.85728-0.37888-68.95616-30.94016-69.3248-68.13696a64.7168 64.7168 0 0 1 18.82112-46.52544c12.64128-12.76416 29.69088-19.79904 48.02048-19.79904h0.6912c37.89312 0.37888 68.99712 30.93504 69.3248 68.11648a64.7168 64.7168 0 0 1-18.82624 46.54592zM484.48512 874.66496v-86.1952H365.71136v-37.1456h118.77376v-62.43328H365.71136v-36.66944h111.97952L349.9776 450.56h51.51744c44.0832 84.27008 114.74944 184.39168 114.74944 184.39168h8.82176l113.53088-184.22784h45.49632l-131.1488 201.66656h109.57824v36.35712h-114.9952v62.58688h114.9952V788.48h-115.16416v86.1952h-62.8736z" p-id="3987"></path></svg>
+            </svg>
+            <span class="advantage_text">
+                    <div class="font">智能报价</div>
+                <label>十年装修经验帮你报价</label>
+                </span>
+        </div>
+        <div>
+            <svg class="icon svg-icon" aria-hidden="true">
+                <svg t="1687604355697" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4206" width="60" height="60"><path d="M512 0C509.22737 0 233.998135 0.744223 0.474686 62.806013l0 448.145592 0 0.555059c0.426285 5.818792 7.917359 93.944367 71.873454 198.890444 38.799054 63.68345 90.436396 120.723068 153.473313 169.588668 78.332562 60.735866 174.603736 108.920298 286.177659 143.20961 111.247992-34.224481 207.295367-82.192219 285.488498-142.665208 62.998729-48.715512 114.646728-105.606819 153.524823-169.071798 64.377051-105.154779 72.076827-194.23772 72.511993-199.957933l0-0.555059L1023.524426 62.806013C790.008081 0.744223 514.783287 0 512 0L512 0zM980.89147 509.655876c-1.121663 11.583411-10.407574 88.34227-66.23672 179.533546-36.173848 59.059144-84.369825 112.091682-143.250462 157.618048-71.129231 55.015652-158.355167 99.290694-259.414056 131.706128-101.271144-32.459838-188.700453-76.903618-260.048155-132.21767C192.992168 800.596383 144.816616 747.411093 108.751116 688.213406 53.085379 596.86849 44.159146 521.011047 43.107642 509.730476L43.107642 96.028724C262.681798 43.616964 508.546202 42.640061 511.999112 42.634732c3.447581 0.005329 249.31465 0.976903 468.89147 53.393992L980.89147 509.655876z" fill="#272636" p-id="4207"></path><path d="M300.757943 433.1519l0-180.576168 231.755254 0 0 63.623948L342.643124 316.199679l0 44.322999 189.870073 0 0 60.108871L384.617114 420.631549l0 152.442236 43.5024 0L428.119515 465.21032l253.383009 0 0 107.187626 43.583217 0 0-151.766397L575.937445 420.631549l0-60.108871 192.132937 0 0-44.322999L575.937445 316.199679l0-63.623948c67.517352 0 133.71322-12.13847 192.132937-22.288497l-40.102776-41.341667c-101.78091 24.726315-203.073367 19.940376-471.79909 19.940376l0 224.265956c2.802825 101.122832-9.44488 156.069212-44.59298 203.142639 7.812564 22.989203 16.520326 44.062788 22.300042 64.308668C278.879746 641.031632 303.560768 550.898965 300.757943 433.1519L300.757943 433.1519 300.757943 433.1519zM724.091075 700.310136l26.160587-40.671156c-47.648023-16.91464-174.361286-87.339612-174.361286-87.339612L575.959647 492.449053l-43.182686 0-0.1119 79.850315c-33.113476 22.784942-113.573911 62.768713-180.635671 86.997696 9.451097 17.10558 9.327652 20.931489 17.419077 41.043268 95.902615-30.475836 183.755545-88.890224 183.755545-88.890224S638.624453 663.532384 724.091075 700.310136L724.091075 700.310136z" fill="#272636" p-id="4208"></path></svg>
+            </svg>
+            <span class="advantage_text">
+                    <div class="font">质量保障</div>
+                    <label>第三方监理公司专业服务</label>
+                </span>
+        </div>
+    </div>
+
+    <div style="width: 100%;opacity: 0.9;display: flex;justify-content: center;color: white;background: url(https://www.wanzhuang.com/Public/Home/Version2/images/m_img03.jpg) no-repeat;">
+        <div style="width: 1200px;">
+            <div style="font-size: 42px;width: 100%;text-align: center;margin-top: 60px;">
+                我们已经服务了
+            </div>
+
+            <div style="display: flex;justify-content: center;height:160px;width: 100%;margin-top: 80px;border-bottom: 1px dashed #fff;">
+                <div style="width: 600px;text-align: center;">
+                    <div style="font-size: 12px;font-size: 20px;">发布金额</div>
+                    <div style="font-size: 60px;" class="data">7000000</div>
+                </div>
+                <div style="width: 600px;text-align: center;">
+                    <div style="font-size: 12px;font-size: 20px;">服务装修公司</div>
+                    <div style="font-size: 60px;" class="data1">28530</div>
+                </div>
+            </div>
+
+            <div style="width: 100%;display: flex;justify-content: center;padding-top: 40px;padding-bottom: 40px;">
+                <div style="width: 400px;text-align: center;">
+                    <div style="font-size: 20px;">服务城市</div>
+                    <div style="font-size: 36px;" class="data2">210</div>
+                </div>
+                <div style="width: 400px;text-align: center;">
+                    <div style="font-size: 20px;">服务设计师</div>
+                    <div style="font-size: 36px;" class="data3">40267</div>
+                </div>
+                <div style="width: 400px;text-align: center;">
+                    <div style="font-size: 20px;">服务家庭</div>
+                    <div style="font-size: 36px;" class="data4">311503</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rendering">
+        <div style="width: 1400px;">
+            <div style="width: 100%;margin-top: 40px;">
+                <div style="width: 100%;height: 55px;font-size: 42px;color: #3d3333;text-align: center;margin-bottom: 10px;">装修效果图</div>
+                <div style="width: 100%;font-size: 18px;color: #9e9595;text-align: center;">陪你一起发现最美的装修，给你更多的灵感</div>
+            </div>
+            <div style="width: 1400px;height: 600px;margin-top: 50px;">
+                <div class="shell">
+                    <input type="radio" name="position">
+                    <input type="radio" name="position">
+                    <input type="radio" name="position" checked>
+                    <input type="radio" name="position">
+                    <input type="radio" name="position">
+                    <div class="box">
+                        <div class="item">
+                            <a href="https://www.kujiale.cn/design/3FO3TO5OVJDO/show?fromqrcode=true" target="_blank">
+                                <div  style="width: 350px;height: 500px;"></div>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="https://www.kujiale.cn/design/3FO3TO651QR9/show?fromqrcode=true" target="_blank">
+                                <div  style="width: 350px;height: 500px;"></div>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="https://yun.kujiale.com/design/3FO413GV19UX/show?fromqrcode=true" target="_blank">
+                                <div  style="width: 350px;height: 500px;"></div>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="https://yun.kujiale.com/design/3FO412KX5WP0/show?fromqrcode=true" target="_blank">
+                                <div  style="width: 350px;height: 500px;"></div>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="https://www.kujiale.cn/design/3FO3TO68RCKB/show?fromqrcode=true" target="_blank">
+                                <div  style="width: 350px;height: 500px;"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 100%;">
+        <div style="width: 100%;display: flex;justify-content: center;margin-bottom: 40px;margin-top: 20px;">
+            <div style="width: 1200px;text-align: center;height: 40px;line-height: 40px;font-size: 40px;color: rgb(81,83,100);">传统定制VS晟恒装饰</div>
+        </div>
+
+        <div style="width: 100%;display: flex;justify-content: center">
+            <div style="width: 450px;height:470px;background-color: rgb(244,245,250);border: 1px solid rgb(221,221,221);">
+                <div style="width: 100%;height: 61px;color: rgb(81,83,100);background: rgb(234,236,244);border-bottom: 1px solid rgb(221,221,221);line-height: 62px;font-size: 26px;font-weight: bold;text-align: center;">传统</div>
+                <div style="width: 100%;height: 134px;display: flex;border-bottom: 1px dashed rgb(230,231,240);">
+                    <div style="width: 150px;height: 134px;color: rgb(81,83,100);font-size: 24px;text-align: center;line-height: 134px;">套路深</div>
+                    <div style="width: 250px;height: 134px;color: rgb(145,155,171);font-size: 16px;display: flex;align-items: center;">
+                        <div>价格不透明，计价方式不统一，一环一环套路深</div>
+                    </div>
+                </div>
+                <div style="width: 100%;height: 134px;display: flex;border-bottom: 1px dashed rgb(230,231,240);">
+                    <div style="width: 150px;height: 134px;color: rgb(81,83,100);font-size: 24px;text-align: center;line-height: 134px;">跑断腿</div>
+                    <div style="width: 250px;height: 134px;color: rgb(145,155,171);font-size: 16px;display: flex;align-items: center;">
+                        <div>建材城家具店大多是独立的，看了橱柜看衣柜……一家一家店逛，费时又费力</div>
+                    </div>
+                </div>
+                <div style="width: 100%;height: 134px;display: flex;">
+                    <div style="width: 150px;height: 134px;color: rgb(81,83,100);font-size: 24px;text-align: center;line-height: 134px;">不统一</div>
+                    <div style="width: 250px;height: 134px;color: rgb(145,155,171);font-size: 16px;display: flex;align-items: center;">
+                        <div>这家店选的橱柜，那家店订的衣柜装好后才发现风格款式根本不搭</div>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 150px;text-align: center;display: flex;align-items: center;justify-content: center;">
+                <img src="https://img.to8to.com/brand_promotion/whole_house/vs_tip.png" style="width: 70px;">
+            </div>
+            <div style="width: 450px;height:470px;background-color: rgb(166,114,113);border: 1px solid rgb(221,221,221);">
+                <div style="width: 100%;height: 61px;color: white;background: rgb(166,114,113);line-height: 62px;font-size: 26px;font-weight: bold;text-align: center;">晟恒装饰</div>
+                <div style="width: 440px;margin-left:5px;height: 134px;display: flex;border-bottom: 1px dashed rgb(230,231,240);background-color: white;">
+                    <div style="width: 150px;height: 134px;color: rgb(166,114,113);font-size: 24px;text-align: center;line-height: 134px;">透明价</div>
+                    <div style="width: 250px;height: 134px;color: rgb(166,114,113);font-size: 16px;display: flex;align-items: center;">
+                        <div>不玩套路，全屋定制透明价，个性化定制，透明计价算得清</div>
+                    </div>
+                </div>
+                <div style="width: 440px;margin-left:5px;height: 134px;display: flex;border-bottom: 1px dashed rgb(230,231,240);background-color: white;">
+                    <div style="width: 150px;height: 134px;color: rgb(166,114,113);font-size: 24px;text-align: center;line-height: 134px;">一站式</div>
+                    <div style="width: 250px;height: 134px;color: rgb(166,114,113);font-size: 16px;display: flex;align-items: center;">
+                        <div>全屋定制，包括全品类商品，橱柜衣柜木门卫浴统统都能买到</div>
+                    </div>
+                </div>
+                <div style="width: 440px;margin-left:5px;height: 134px;display: flex;border-bottom: 1px dashed rgb(230,231,240);background-color: white;">
+                    <div style="width: 150px;height: 134px;color: rgb(166,114,113);font-size: 24px;text-align: center;line-height: 134px;">统一</div>
+                    <div style="width: 250px;height: 134px;color: rgb(166,114,113);font-size: 16px;display: flex;align-items: center;">
+                        <div>全屋家具都经过精心设计， 款式齐全，风格统一，品质有保障</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 100%;height: 200px;background-color: black;margin-top: 50px;">
+
+    </div>
+
+    <script type="text/javascript">
+
+        function animate(obj,length,callback){
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function(){
+                var step=(length-obj.offsetLeft)/10; // 缓动效果，步长=（目标值-当前值）/10
+                step=step>0 ? Math.ceil(step) : Math.floor(step);
+                if(obj.offsetLeft==length){
+                    clearInterval(obj.timer);
+                    if(callback)
+                        callback();
+                    //callback && callback()
+                }
+                obj.style.left=obj.offsetLeft+step+'px';
+            },15);
+        }
+
+        window.addEventListener('load',function(){
+            const lunbo=document.querySelector(".mylunbo");
+            const arrowl=document.querySelector(".arrow-l");
+            const arrowr=document.querySelector(".arrow-r");
+            var num=0;  // 左右移动按钮定位图片
+            var circle=0;  // 定位小圆点
+            var flag=true;  // 节流阀
+            //1、右侧按钮，左侧按钮
+            lunbo.addEventListener('mouseenter',function(){
+                arrowl.style.display='block';
+                arrowr.style.display='block';
+                clearInterval(timer);  // 清楚计时器，轮播图不自动播放
+                //timer=null;  // 清楚timer变量
+            });
+            lunbo.addEventListener('mouseleave',function(){
+                arrowl.style.display='none';
+                arrowr.style.display='none';
+                timer=setInterval(function(){
+                    arrowr.click();
+                },2000);
+            });
+            //2、创建小圆点
+            const ul=lunbo.querySelector("ul");
+            const ol=lunbo.querySelector("ol");
+            for(let i=0;i<ul.children.length;i++){  // 根据图片数量生成小圆点
+                let li=document.createElement("li");
+                li.setAttribute('index',i);  // 添加自定义属性index
+                ol.appendChild(li);
+                //3、添加小圆圈点击事件
+                li.onclick=function(){
+                    for(let i=0;i<ol.children.length;i++){
+                        ol.children[i].className='';
+                    }
+                    this.className='current';
+                    //4、小圆圈动画
+                    let lunbowidth=lunbo.offsetWidth;
+                    let index=this.getAttribute('index');
+                    num=circle=index;  // 点击小圆点时，将num和circle的值赋值为index，即将小圆点顺序和左右按钮的num定位到当前图片
+                    animate(ul,-index*lunbowidth);  // 调用动画函数，-index*lunboWidth为终点位置
+                }
+            }
+            //5、克隆子元素-->ABCDA，此时最后一张图为第一张图的复制！！
+            let child=ul.children[0].cloneNode(true);
+            ul.appendChild(child);
+            ol.children[0].className='current';
+            //6、右侧按钮点击事件
+            arrowr.addEventListener('click',function(){
+                if(flag){
+                    flag=false;  // 未完成轮播动画，不能轮播，设置为false
+                    if(num==ul.children.length-1){
+                        ul.style.left=0;  // 当点击到最后一个图片时，即和第一幅图相同的那张，num为ul.children.length-1,先切换到第一张(很快),执行动画切换到第二张
+                        num=0;  // num重新设为0，后面再加1
+                    }
+                    num++;
+                    animate(ul,-num*lunbo.offsetWidth,function(){
+                        flag=true;  // 将flag设置为true，可以再次点击轮播
+                    });
+                    circle++;
+                    if(circle==ol.children.length)  // 当小圆圈移动到最后，点击右移，circle+1,此时circle为ol.children.length
+                        circle=0;
+                    setCurrent();
+                }
+            })
+            //7、左侧点击事件
+            arrowl.addEventListener('click',function(){
+                if(flag){
+                    flag=false;
+                    if(num==0){
+                        num=ul.children.length-1;  // 当轮播图为第一张图时，num设为最后一张图的index，之后再减一
+                        ul.style.left=-num*lunbo.offsetWidth+'px';  // 先切换到最后一张图，之后再调用动画函数到实际倒数第二图
+                    }
+                    num--;
+                    animate(ul,-num*lunbo.offsetWidth,function(){
+                        flag=true;
+                    });
+                    circle--;
+                    if(circle==-1)  // 当小圆圈在第一个位置时，点击左移，circle-1，此时circle为-1
+                        circle=ol.children.length-1;
+                    setCurrent();
+                }
+            });
+            var timer=setInterval(function(){
+                arrowr.click();
+            },2000);
+            function setCurrent(){
+                for(let i=0;i<ol.children.length;i++){
+                    ol.children[i].className='';
+                }
+                ol.children[circle].className='current';
+            }
+        })
+
+        /*
+        * startNum 代表要跳动的初始数字
+        * targetNum 代表要跳动到的数字
+        * time  代表要跳动需要花费的时间
+        * selector 代表要跳动元素的选择器
+        */
+
+        const $setJumpNumber = (startNum, targetNum, time, selector) => {
+            let dom = document.querySelector(selector);
+            let originNum = startNum;
+            let stepNum = 0;
+            let timeNum = time;
+            dom.innerHTML = startNum;
+            let timeId = setInterval(() => {
+                if (originNum < targetNum) {
+                    timeNum -= 0.001;
+                    let strNum = originNum.toString();
+                    // 数字比较少的时候直接用 + 1; 数字很大直接 +1 要很久才能调到最对应的数字，所有后三位数随机跳动的方式进行模拟生成
+                    if (targetNum.toString().length < 6) {
+                        stepNum += 1; // 这样才可以实现越跳越快的效果
+                        originNum = originNum + stepNum;
+                        dom.innerHTML = originNum;
+                    } else {
+                        stepNum += 500; // 这样才可以实现越跳越快的效果
+                        originNum = originNum + stepNum;
+                        dom.innerHTML = strNum.substr(0, strNum.length - 3) + Math.floor(Math.random()*10) + Math.floor(Math.random()*10) + Math.floor(Math.random()*10);
+                    }
+                } else {
+                    dom.innerHTML = targetNum;
+                    clearInterval(timeId);
+                }
+            }, timeNum);
+        };
+        function start (startNum,targetNum,time,selector) {
+            $setJumpNumber(startNum,targetNum,time,selector);
+        };
+        start (0, 7000000, 3, '.data');
+        start (0, 28530, 3, '.data1');
+        start (0, 210, 3, '.data2');
+        start (0, 40267, 3, '.data3');
+        start (0, 311503, 3, '.data4');
+
+
+    </script>
+</body>
+</html>
